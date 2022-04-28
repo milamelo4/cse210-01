@@ -1,7 +1,7 @@
-import random
-from re import T
-print("Welcome to my Tic Tac Toe")
 
+
+print("Welcome to my Tic Tac Toe")
+print()
 
 def main():
     player = switch_player("") 
@@ -10,30 +10,30 @@ def main():
     while not (check_winner(board) or check_tie(board)):
         print_board(board)
         player_input(player, board)
-        player = switch_player(player)
-    
-         
+        print()
+        player = switch_player(player)           
         message(board)
     
-    #print_board(board)
-    
+        
     print(f"Thank you for playing.")
     answer = input("Would you like to play again 'yes' or 'no? ")
-    while answer == "yes":
+    print()
+    if answer.lower() =="no":
+        print("Goodbye!")
+    while answer.lower() == "yes":
         play_again(board) 
-        print("Bye")
+        print("Goodbye!")
         break    
 
 def message(board):       
     if check_winner(board)== True:
         print_board(board)
         print("We have a winner!") 
-        #return False   
+          
     if check_tie(board)== True:
         print_board(board)
-        print("We have a tie") 
-        #return False 
-        
+        print("We have a tie!") 
+                
     
 def play_again(board):
     player = switch_player("") 
@@ -78,54 +78,34 @@ def check_winner(board):
             board[1] == board[4] == board[7] or
             board[2] == board[5] == board[8] or
             board[0] == board[4] == board[8] or
-            board[2] == board[4] == board[6])
-    
+            board[2] == board[4] == board[6])    
     
         
 def player_input(player, board):
-    user_input = int(input(f"{player}, Please enter a slot number between 1-9: "))
+    user_input = int(input(f"\n{player}, Please enter a slot number between 1-9: "))
     a= user_input - 1 
     
     #>= 1 and user_input <=9 and board[user_input]
-    if board[a]  != "x":
-        print(board) 
-        if board[a] != "o":
+    # if board[a]  != "x":
+         
+    #     if board[a] != "o":
             
-            board[user_input-1] = player
+    #         board[user_input-1] = player 
+            
         
-    else:
-        pass
-        print("Slot taken")
-        
-    #if board[user_input] == "x" or board[user_input] == "o":
     # else:
-    #     print("Slot already taken.")
-    
+    #     pass
+    #     print("Slot taken")
+         
            
  
 def switch_player(current_player):
     if current_player == "" or current_player == "o":
-        return "x"
+        current_player= "x"
     elif current_player == "x":
-        return "o"        
+        current_player ="o"             
         
-# def computer_turn(board, current_player):
-#     while current_player == "0":
-#         guess = random.randint(0, 8)
-#         if board[guess] == "-":
-#             board[guess] = "0"
-#             switch_player()
-                          
-
-     
-
-    
-
-         
-       
-                  
-        
-        
+    return current_player     
         
 if __name__ == "__main__":
    main()

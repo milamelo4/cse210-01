@@ -1,4 +1,11 @@
+"""
+This is my Tic Tac Toe game.
+Its the first time I created
+this game. It was challenging, and I'm
+sure there is a lot to improve.
+Author: Camila Melo.
 
+"""
 
 print("Welcome to my Tic Tac Toe")
 print()
@@ -6,24 +13,24 @@ print()
 def main():
     player = switch_player("") 
     board = create_board()
-    
+        
     while not (check_winner(board) or check_tie(board)):
         print_board(board)
-        player_input(player, board)
+        player_input(player, board)            
+            
         print()
-        player = switch_player(player)           
-        message(board)
+        player = switch_player(player)          
+        message(board)      
     
         
     print(f"Thank you for playing.")
     answer = input("Would you like to play again 'yes' or 'no? ")
-    print()
-    if answer.lower() =="no":
-        print("Goodbye!")
-    while answer.lower() == "yes":
-        play_again(board) 
-        print("Goodbye!")
-        break    
+    if answer.lower() =="yes":
+        play_again(board)
+    
+    else:
+        print("Goodbye!") 
+           
 
 def message(board):       
     if check_winner(board)== True:
@@ -46,12 +53,17 @@ def play_again(board):
     
     print_board(board)
     message(board)
-    answer = input("Thank you for playing. Would you like to play again 'yes' or 'no? ")     
+    
+    answer = input("Thank you for playing. Would you like to play again 'yes' or 'no? ") 
+    if answer.lower() =="no":
+        print("Goodbye!")
+    while answer.lower() == "yes":
+        play_again(board)
+        break
+        
         
 def create_board():
-    board = []
-    for slot in range(9):
-        board.append(slot + 1)
+    board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     return board
 
 
@@ -82,30 +94,23 @@ def check_winner(board):
     
         
 def player_input(player, board):
-    user_input = int(input(f"\n{player}, Please enter a slot number between 1-9: "))
-    a= user_input - 1 
+    user_input = int(input(f"\nPlayer {player}, Please enter a slot number between 1-9: "))
     
-    #>= 1 and user_input <=9 and board[user_input]
-    # if board[a]  != "x":
-         
-    #     if board[a] != "o":
-            
-    #         board[user_input-1] = player 
-            
-        
-    # else:
-    #     pass
-    #     print("Slot taken")
-         
+    a = user_input - 1    
+    if board[a]  != "x" and board[a] != "o":
+        board[user_input-1] = player              
+    else:        
+        print("Slot already taken.") 
+        player_input(player, board)                 
            
  
-def switch_player(current_player):
-    if current_player == "" or current_player == "o":
-        current_player= "x"
-    elif current_player == "x":
-        current_player ="o"             
+def switch_player(player):
+    if player == "" or player == "o":
+        player= "x"
+    elif player == "x":
+        player ="o"             
         
-    return current_player     
+    return player     
         
 if __name__ == "__main__":
    main()
